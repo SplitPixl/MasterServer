@@ -92,6 +92,15 @@ namespace MasterServer
             }
         }
 
+        protected override void OnError(ErrorEventArgs e)
+        {
+            base.OnError(e);
+            {
+                Logging.Log(string.Format("[WS: Disconnect] {0}-{1}: {2}", Name, Device, -1));
+                OnDisconnect(Name, this);
+            }
+        }
+
         private class BasicAuth
         {
             public bool Valid { get; private set; } = true;

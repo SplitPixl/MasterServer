@@ -6,7 +6,7 @@ namespace MasterServer
 {
     internal class SubManager
     {
-        private List<SubClient> subs = new List<SubClient>();
+        private SubClient[] subs = { };
 
         public SubManager(HttpServer httpsv)
         {
@@ -19,12 +19,16 @@ namespace MasterServer
 
         private void Sub_OnConnect(string name, SubClient sub)
         {
-            subs.Add(sub);
+            List<SubClient> clients = new List<SubClient>(subs);
+            clients.Add(sub);
+            subs = clients.ToArray();
         }
 
         private void Sub_OnDisconnect(string name, SubClient sub)
         {
-            subs.Remove(sub);
+            List<SubClient> clients = new List<SubClient>(subs);
+            clients.Remove(sub);
+            subs = clients.ToArray();
         }
 
         public int SendTo(string name, string data)
