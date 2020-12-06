@@ -13,7 +13,7 @@ namespace MasterServer
         public static void Main(string[] args)
         {
 
-            var httpsv = new HttpServer("http://0.0.0.0:6969");
+            var httpsv = new HttpServer(6969);
 
 #if DEBUG
             // To change the logging level.
